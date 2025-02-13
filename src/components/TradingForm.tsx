@@ -62,87 +62,92 @@ function TradingForm({ cryptoId, currentPrice }: TradingFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="flex space-x-2">
-        <button
-          type="button"
-          onClick={() => setOperation('buy')}
-          className={`flex-1 py-2 px-4 rounded-lg font-medium ${operation === 'buy' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-        >
-          Acheter
-        </button>
-        <button
-          type="button"
-          onClick={() => setOperation('sell')}
-          className={`flex-1 py-2 px-4 rounded-lg font-medium ${operation === 'sell' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-        >
-          Vendre
-        </button>
-      </div>
+    <>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="flex space-x-2">
+          <button
+            type="button"
+            onClick={() => setOperation('buy')}
+            className={`flex-1 py-2 px-4 rounded-lg font-medium ${operation === 'buy' ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+          >
+            Acheter
+          </button>
+          <button
+            type="button"
+            onClick={() => setOperation('sell')}
+            className={`flex-1 py-2 px-4 rounded-lg font-medium ${operation === 'sell' ? 'bg-red-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+          >
+            Vendre
+          </button>
+        </div>
 
-      <div className="flex space-x-2">
-        <button
-          type="button"
-          onClick={() => setOrderType('market')}
-          className={`flex-1 py-2 px-4 rounded-lg font-medium ${orderType === 'market' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-        >
-          Au marché
-        </button>
-        <button
-          type="button"
-          onClick={() => setOrderType('limit')}
-          className={`flex-1 py-2 px-4 rounded-lg font-medium ${orderType === 'limit' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-        >
-          Limite
-        </button>
-      </div>
+        <div className="flex space-x-2">
+          <button
+            type="button"
+            onClick={() => setOrderType('market')}
+            className={`flex-1 py-2 px-4 rounded-lg font-medium ${orderType === 'market' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+          >
+            Au marché
+          </button>
+          <button
+            type="button"
+            onClick={() => setOrderType('limit')}
+            className={`flex-1 py-2 px-4 rounded-lg font-medium ${orderType === 'limit' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+          >
+            Limite
+          </button>
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700">Quantité</label>
-        <input
-          type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          placeholder="0.00"
-          step="any"
-          required
-        />
-      </div>
-
-      {orderType === 'limit' && (
         <div>
-          <label className="block text-sm font-medium text-gray-700">Prix limite (€)</label>
+          <label className="block text-sm font-medium text-gray-700">Quantité</label>
           <input
             type="number"
-            value={limitPrice}
-            onChange={(e) => setLimitPrice(e.target.value)}
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             placeholder="0.00"
             step="any"
             required
           />
         </div>
-      )}
 
-      <div className="text-sm text-gray-600">
-        Total estimé:{' '}
-        {amount && (
-          <span className="font-medium">
-            {(
-              parseFloat(amount) * (orderType === 'market' ? currentPrice : parseFloat(limitPrice) || 0)
-            ).toLocaleString('fr-FR', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
-          </span>
+        {orderType === 'limit' && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Prix limite (€)</label>
+            <input
+              type="number"
+              value={limitPrice}
+              onChange={(e) => setLimitPrice(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder="0.00"
+              step="any"
+              required
+            />
+          </div>
         )}
+
+        <div className="text-sm text-gray-600">
+          Total estimé:{' '}
+          {amount && (
+            <span className="font-medium">
+              {(
+                parseFloat(amount) * (orderType === 'market' ? currentPrice : parseFloat(limitPrice) || 0)
+              ).toLocaleString('fr-FR', {
+                style: 'currency',
+                currency: 'EUR',
+              })}
+            </span>
+          )}
+        </div>
+      </form>
+      <div className="mt-10">
+        <MiniBlog cryptoId={cryptoId} />
       </div>
-    </form>
+    </>
   );
 }
 
