@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
@@ -9,6 +8,7 @@ import CryptoDetail from './pages/CryptoDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
+import Transfers from './pages/Transfers';
 
 function App() {
   return (
@@ -35,6 +35,15 @@ function App() {
                   <Portfolio />
                 </ProtectedRoute>
               }
+            />
+
+            <Route
+            path="/transfers"
+            element={
+              <ProtectedRoute>
+                <Transfers />
+              </ProtectedRoute>
+            }
             />
             <Route
               path="/crypto/:id"
