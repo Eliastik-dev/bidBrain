@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { ArrowRight, LineChart } from 'lucide-react';
@@ -13,11 +12,9 @@ function Home() {
           <LineChart className="h-16 w-16 text-blue-600" />
         </div>
         <h1 className="text-4xl font-bold text-gray-900 mb-6">
-          Welcome to CryptoTrade
+          Welcome to Bid Brain
         </h1>
         <p className="text-xl text-gray-600 mb-8">
-          Experience the future of crypto trading with our advanced platform.
-          Real-time prices, secure transactions, and a vibrant trading community.
         </p>
         {user ? (
           <Link
