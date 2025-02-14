@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useCryptoStore } from '../store/cryptoStore';
+import { useOrderStore } from "../store/orderStore";
 import { useAuthStore } from '../store/authStore';
 import { toast } from 'react-hot-toast';
 import MiniBlog from "../pages/MiniBlog";
@@ -14,6 +15,7 @@ function TradingForm({ cryptoId, currentPrice }: TradingFormProps) {
   const [amount, setAmount] = useState("");
   const [limitPrice, setLimitPrice] = useState("");
 
+  const { addOrder } = useOrderStore();
   const { buyCrypto, sellCrypto, balance, portfolio } = useCryptoStore();
   const user = useAuthStore((state) => state.user);
 
